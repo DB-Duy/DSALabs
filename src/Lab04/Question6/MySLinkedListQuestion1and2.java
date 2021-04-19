@@ -1,15 +1,15 @@
-package Lab04;
+package Lab04.Question6;
 
-import geom.Point2D;
+import Lab04.Lists.MyArrayList;
+import Lab04.Lists.SLinkedList;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class ArrayListDemo {
+public class MySLinkedListQuestion1and2 {
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
+        List<String> list = new SLinkedList<>();
         for (int idx = 0; idx < 10; idx++) {
             list.add("" + idx);
         }
@@ -30,7 +30,7 @@ public class ArrayListDemo {
 
         //(3)Print elements - Use Iterator, travel forward
         System.out.printf("%-32s", "Go forward, use Iterator:");
-        Iterator<String> it = list.iterator();
+        Iterator<String> it = list.listIterator();
         while (it.hasNext()) {
             String item = it.next();
             System.out.printf("%s ", item);
@@ -58,7 +58,7 @@ public class ArrayListDemo {
     }
 
     public static void question2() {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = new MyArrayList<>();
         System.out.println("Question 2:");
         //Add elements
         for (int idx = 0; idx < 10; idx++) {
@@ -87,8 +87,4 @@ public class ArrayListDemo {
         }
         System.out.println();
     }
-
-
 }
-
-

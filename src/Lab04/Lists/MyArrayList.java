@@ -1,4 +1,4 @@
-package Lab04;
+package Lab04.Lists;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -144,12 +144,12 @@ public class MyArrayList<E> implements java.util.List<E> {
 
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        return new MyListIterator(0);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new MyListIterator(index);
     }
 
     public boolean contains(Object o) {/*here: code*/
@@ -165,7 +165,7 @@ public class MyArrayList<E> implements java.util.List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new MyIterator();
     }
 
     //Group-6: travel on lists

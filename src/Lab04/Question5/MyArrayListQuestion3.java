@@ -1,27 +1,27 @@
-package Lab04;
+package Lab04.Question5;
 
+import Lab04.Lists.MyArrayList;
 import geom.Point2D;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Question3 {
+public class MyArrayListQuestion3 {
     public static void main(String[] args) {
         Point2D[] array = Point2D.generate(10,0,10);
         Point2D point = new Point2D(0,0);
+        List<Point2D> list = new MyArrayList<>();
         System.out.println("Before remove:");
-        for(int i =0;i<array.length;i++){
+        for(int i =0;i<array.length;i++){  // sets Y coordinate to 0 for easier checking
             array[i].setY(0);
             System.out.println(array[i]);
+            list.add(array[i]);
         }
 
-        List<Point2D> list = new ArrayList<>(Arrays.asList(array));
-        removeHittedPoints(list,point,4.0);
+        removeHittedPoints(list,point,4.0);   // change radius here
 
         System.out.println();
-        System.out.println("After remove:");
+        System.out.println("After remove: ");
         for(int i=0;i<list.size();i++){
             System.out.println(list.get(i));
         }

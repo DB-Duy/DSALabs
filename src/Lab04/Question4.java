@@ -9,10 +9,10 @@ import java.util.Vector;
 public class Question4 {
     public static void main(String[] args) {
         float[] time = listTime();
-        System.out.printf("%-20s %-20s %-20s %-20s %n","Implementation","add(0, object)","get(0)","add(object)");
-        System.out.printf("%-20s %.1f %-20s %.1f %-20s %.1f %n","Linked List",time[0],"",time[3],"",time[6]);
-        System.out.printf("%-20s %.1f %-20s %.1f %-20s %.1f %n","Array List",time[1],"",time[4],"",time[7]);
-        System.out.printf("%-20s %.1f %-20s %.1f %-20s %.1f %n","Linked List",time[2],"",time[5],"",time[8]);
+        System.out.printf("%-20s %-20s %-20s %-20s %n","Implementation","add(0, object)","get()","add(object)");
+        System.out.printf("%-20s %-20s %-20s %-20s %n","Linked List",""+time[0],""+time[3],""+time[6]);
+        System.out.printf("%-20s %-20s %-20s %-20s %n","Array List",""+time[1],""+time[4],""+time[7]);
+        System.out.printf("%-20s %-20s %-20s %-20s %n","Vector",""+time[2],""+time[5],""+time[8]);
     }
     public static float[] listTime() {
         float[] time = {0,0,0,0,0,0,0,0,0}; //linked, array, vector, add(0), get, add in order
@@ -24,7 +24,7 @@ public class Question4 {
             if(i<3){
             double start,end;
             start=System.nanoTime();
-            for (int k = 0; k < 5000; k++) {
+            for (int k = 0; k < 1000; k++) {
                 switch (i) {
                     case 0:
                         linked.add(0, new Point2D(0, 0));
@@ -43,10 +43,10 @@ public class Question4 {
             array.clear();
             vector.clear();
         }
-            if(i>=6){
+            else if(i>=6){
                 double start,end;
                 start=System.nanoTime();
-                for (int k = 0; k < 5000; k++) {
+                for (int k = 0; k < 1000; k++) {
                     switch (i) {
                         case 0:
                             linked.add(new Point2D(0, 0));
@@ -66,21 +66,26 @@ public class Question4 {
                 vector.clear();
             }
             else{
-                linked.add(0, new Point2D(0, 0));
-                array.add(0,new Point2D(0,0));
-                vector.add(0,new Point2D(0,0));
+                if(linked.isEmpty()){
+                for(int k=0;k<1000;k++){
+                    linked.add(new Point2D(k,k));
+                    array.add(new Point2D(k,k));
+                    vector.add(new Point2D(k,k));
+                }
+                }
                 double start, end;
                 start=System.nanoTime();
-                for (int k = 0; k < 5000; k++) {
+                for (int k = 0; k < 1000; k++) {
+                    int rand =(int) Math.random()*1000;
                     switch (i) {
                         case 3:
-                            linked.get(0);
+                            linked.get(rand);
                             break;
                         case 4:
-                            array.get(0);
+                            array.get(rand);
                             break;
                         case 5:
-                            vector.get(0);
+                            vector.get(rand);
                             break;
                     }
                 }
@@ -88,7 +93,7 @@ public class Question4 {
                 time[i]+=(end-start);
             }
         }
-        time[i]=time[i]/(1000*5000);
+        time[i]=time[i]/(1000*1000);
         }
         return time;
     }
