@@ -196,7 +196,7 @@ public class SLinkedList<E> implements java.util.List<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        return getNode(index).element;
     }
 
     @Override

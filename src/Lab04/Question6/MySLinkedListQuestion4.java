@@ -1,20 +1,19 @@
-package Lab04.Question5;
+package Lab04.Question6;
 
 import Lab04.Lists.MyArrayList;
+import Lab04.Lists.SLinkedList;
 import geom.Point2D;
 
-
-
-public class MyArrayListQuestion4 {
+public class MySLinkedListQuestion4 {
     public static void main(String[] args) {
         float[] time = listTime();
         System.out.printf("%-20s %-20s %-20s %-20s %n","Implementation","add(0, object)","get(0)","add(object)");
-        System.out.printf("%-20s %-20s %-20s %-20s %n","MyArrayList",""+time[0],""+time[2],""+time[1]);
+        System.out.printf("%-20s %-20s %-20s %-20s %n","Slinked List",""+time[0],""+time[2],""+time[1]);
 
     }
     public static float[] listTime() {
-        float[] time = {0,0,0,0,0,0,0,0,0}; //add(0), get, add in order
-        MyArrayList<Point2D> list = new MyArrayList<>();
+        float[] time = {0,0,0}; //add(0), get, add in order
+        SLinkedList<Point2D> list = new SLinkedList<>();
         for(int i=0;i<3;i++){
             for (int j = 0; j < 100; j++) {
                 if(i==0){
