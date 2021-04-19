@@ -87,7 +87,7 @@ public class SLinkedList<E> implements java.util.List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new MyIterator();
     }
 
     @Override
@@ -138,12 +138,12 @@ public class SLinkedList<E> implements java.util.List<E> {
 
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        return new MyListIterator();
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new MyListIterator(index);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class SLinkedList<E> implements java.util.List<E> {
 
     @Override
     public E get(int index) {
-        return getNode(index).element;
+        return getDataNode(index).element;
     }
 
     @Override
@@ -225,6 +225,9 @@ public class SLinkedList<E> implements java.util.List<E> {
     }
 
     class MyIterator implements Iterator<E> {
+        Node<E> prev = SLinkedList.this.head;
+        Node<E> cur = prev.next;
+
         int cursor = 0;
         MoveType moveType = MoveType.NEXT;
         boolean afterMove = false;
@@ -239,10 +242,14 @@ public class SLinkedList<E> implements java.util.List<E> {
  Move cursor to next + return preivous element
  */
         public E next() {
-            cursor += 1;
-            moveType = MoveType.NEXT;
-            afterMove = true;
-            return SLinkedList.this.getNode(cursor-1).element;
+            if(afterMove){
+                prev = prev.next;
+            }
+            moveType= MoveType.NEXT;
+            afterMove=true;
+            cur = cur.next;
+            cursor++;
+            return prev.next.element;
         }
 
         @Override
@@ -255,39 +262,62 @@ public class SLinkedList<E> implements java.util.List<E> {
     }
 
     class MyListIterator extends MyIterator implements ListIterator<E> {
+        public MyListIterator(){}
+        public MyListIterator(int index){
+            //SLinkedList.this.checkValidIndex(index);
+            prev=SLinkedList.this.getNode(index-1);
+            cur=prev.next;
+            cursor=index;
+        }
         @Override
         public boolean hasPrevious() {
-            return false;
+            return this.cursor!=0;
         }
 
         @Override
         public E previous() {
-            return null;
+            moveType=MoveType.PREV;
+            afterMove=true;
+            prev = SLinkedList.this.getNode(cursor-2);
+            cur=prev.next;
+            cursor--;
+            return cur.element;
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            return cursor;
         }
 
         @Override
         public int previousIndex() {
-            return 0;
+            return cursor-1;
         }
 
         @Override
         public void remove() {
-
+            if(!afterMove) return;
+            if(moveType==MoveType.NEXT)
+                super.remove();
+            else{
+                SLinkedList.this.remove(cursor);
+                afterMove=false;
+            }
         }
 
         @Override
         public void set(E e) {
-
+            if(afterMove){
+                prev.next.element=e;
+            }
         }
 
         @Override
         public void add(E e) {
-
+            if(afterMove){
+                Node<E> newNode = new Node<>(null,e);
+                addAfter(prev,newNode);
+            }
         }/*here: code*/
     }
 
