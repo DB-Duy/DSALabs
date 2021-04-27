@@ -229,7 +229,7 @@ public class SLinkedList<E> implements java.util.List<E> {
         Node<E> cur = prev.next;
 
         int cursor = 0;
-        MoveType moveType = MoveType.NEXT;
+        SLinkedList.MoveType moveType = MoveType.NEXT;
         boolean afterMove = false;
 
         @Override
@@ -248,7 +248,7 @@ public class SLinkedList<E> implements java.util.List<E> {
             moveType= MoveType.NEXT;
             afterMove=true;
             cur = cur.next;
-            cursor++;
+            cursor+=1;
             return prev.next.element;
         }
 
@@ -258,11 +258,12 @@ public class SLinkedList<E> implements java.util.List<E> {
             SLinkedList.this.remove(cursor - 1);
             cursor -= 1;
             afterMove = false;
+            size--;
         }
     }
 
     class MyListIterator extends MyIterator implements ListIterator<E> {
-        public MyListIterator(){}
+        public MyListIterator(){};
         public MyListIterator(int index){
             //SLinkedList.this.checkValidIndex(index);
             prev=SLinkedList.this.getNode(index-1);

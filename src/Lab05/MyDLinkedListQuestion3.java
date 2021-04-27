@@ -1,17 +1,15 @@
-package Lab04.Question6;
+package Lab05;
 
-import Lab04.Lists.MyArrayList;
-import Lab04.Lists.SLinkedList;
 import geom.Point2D;
 
 import java.util.List;
 import java.util.ListIterator;
 
-public class MySLinkedListQuestion3 {
+public class MyDLinkedListQuestion3 {
     public static void main(String[] args) {
         Point2D[] array = Point2D.generate(10, 0, 10);
         Point2D point = new Point2D(0, 0);
-        List<Point2D> list = new SLinkedList<>();
+        List<Point2D> list = new DLinkedList<>();
         System.out.println("Before remove:");
         for (int i = 0; i < array.length; i++) {  // sets Y coordinate to 0 for easier checking
             array[i].setY(0);
